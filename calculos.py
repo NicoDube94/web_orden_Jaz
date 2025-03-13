@@ -1,0 +1,1 @@
+#la idea es hacer el calculo por hora de cada cumpleaños y sumarlos semanal o mensualmente
