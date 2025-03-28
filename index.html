@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mostrar cumpleaños</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>formulario de carga de cumpleaños</h1>
+  <form>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="birthday">Cumpleaños:</label>
+    <input type="date" id="birthday" name="birthday" required>
+    <br>
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('change', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const birthday = document.getElementById('birthday').value;
+    const day = obtenerDiaSemana(birthday);
+    form.appendChild(document.createElement('p')).textContent = `${day}`;
+    // alert(`El cumpleaños de ${name} es ${day}`);
+  });
+  function obtenerDiaSemana(fechaString) {
+  // Convertir la fecha de cadena de texto a un objeto Date
+  const fecha = new Date(fechaString);
+
+  // Array con los nombres de los días de la semana
+  const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+  // Obtener el día de la semana (0 = Domingo, 1 = Lunes, ...)
+  const diaSemana = fecha.getDay();
+
+  // Retornar el nombre del día
+  return diasSemana[diaSemana];
+}
+
+// Ejemplo de uso
+const fecha = "2025-03-16"; // Formato ISO (YYYY-MM-DD)
+console.log(obtenerDiaSemana(fecha)); // Resultado: Domingo
+
+</script>
+</html>

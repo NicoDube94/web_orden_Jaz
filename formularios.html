@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carga de cumpleaños</title>
+</head>
+<body>
+  <h1>Carga cada cumpleaños</h1>
+  <h3>Agrega cada cumpleaños por separado en cada fecha:</h3>
+  <form>
+    <label for="cumple">Fecha de Cumpleaños:</label>
+    <input type="date" id="cumple" name="cumple" required>
+    <br>
+    <label for="Hora_inicio">Hora INICIO de Cumpleaños:</label><input type="time" id="Hora_inicio" name="Hora_inicio"></label>
+    <br>
+    <label for="Hora_fin">Hora FIN de Cumpleaños:</label><input type="time" id="Hora_fin" name="Hora_fin"></label>
+    <input type="submit" value="Enviar">
+  </form>
+  <script type="module">
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const cumple = document.getElementById('cumple').value;
+      const Hora_inicio = document.getElementById('Hora_inicio').value;
+      const Hora_fin = document.getElementById('Hora_fin').value;
+      let dia = obtenerDiaSemana(cumple);
+      let diccionario={dia:dia,cumple:cumple,Hora_inicio:Hora_inicio,Hora_fin:Hora_fin}
+      const archivoJSON = JSON.stringify(diccionario,null,2);
+      console.log(archivoJSON);
+      form.appendChild(document.createElement('div')).innerHTML = `<p><b>${dia} ${cumple} ${Hora_inicio} ${Hora_fin}</b></p>`;
+    });
+
+    function obtenerDiaSemana(fechaString) {
+      // Convertir la fecha de cadena de texto a un objeto Date
+      const fecha = new Date(fechaString);
+
+      // Array con los nombres de los días de la semana
+      const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado','Domingo'];
+
+      // Obtener el día de la semana (0 = Domingo, 1 = Lunes, ...)
+      const diaSemana = fecha.getDay();
+
+      // Retornar el nombre del día
+      return diasSemana[diaSemana];
+    }
+  </script>
+</body>
+</html>
