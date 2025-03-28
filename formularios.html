@@ -4,18 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carga de cumpleaños</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Carga cada cumpleaños</h1>
   <h3>Agrega cada cumpleaños por separado en cada fecha:</h3>
   <form>
-    <label for="cumple">Fecha de Cumpleaños:</label>
-    <input type="date" id="cumple" name="cumple" required>
-    <br>
-    <label for="Hora_inicio">Hora INICIO de Cumpleaños:</label><input type="time" id="Hora_inicio" name="Hora_inicio"></label>
-    <br>
-    <label for="Hora_fin">Hora FIN de Cumpleaños:</label><input type="time" id="Hora_fin" name="Hora_fin"></label>
-    <input type="submit" value="Enviar">
+    <fieldset>
+      <legend>Carga de Datos</legend>
+      <label for="cumple">Fecha de Cumpleaños:</label>
+      <input class="cambiar_tamanio" type="date" id="cumple" name="cumple" required>
+      <br>
+      <label for="Hora_inicio">Hora INICIO de Cumpleaños:</label><input class="cambiar_tamanio" type="time" id="Hora_inicio" name="Hora_inicio"></label>
+      <br>
+      <label for="Hora_fin">Hora FIN de Cumpleaños:</label><input class="cambiar_tamanio" type="time" id="Hora_fin" name="Hora_fin"></label>
+      <input type="submit" value="Enviar">
+  </fieldset>
   </form>
   <script type="module">
     const form = document.querySelector('form');
