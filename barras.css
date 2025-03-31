@@ -1,0 +1,43 @@
+.principal{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.contenedor{
+  max-width: 450px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid rgb(48, 114, 48);
+  margin-top: 6px;
+  padding-bottom: 6px;
+}
+.contenedor_barra{
+  flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row;
+  margin-left: 9px;
+  margin-top:9px;
+}
+.barra{
+  margin-left: 15px;
+}
+.barra1{
+  background-color: rgb(53, 50, 49);
+  color: rgb(48, 114, 48);
+}
+.barra2{
+  background-color: rgb(150, 90, 70);
+  color: rgb(10, 8, 41);
+}
+.barra3{
+  background-color: rgb(71, 70, 70);
+  color: rgb(17, 6, 168);
+}
+.dia{
+  margin: 0;
+}
+.fecha{
+  margin-left: 5px;
+}

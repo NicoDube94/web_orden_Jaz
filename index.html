@@ -4,47 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mostrar cumpleaños</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="barras.css">
 </head>
 <body>
-  <h1>formulario de carga de cumpleaños</h1>
-  <form>
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" required>
-    <br>
-    <label for="birthday">Cumpleaños:</label>
-    <input type="date" id="birthday" name="birthday" required>
-    <br>
-    <input type="submit" value="Enviar">
-  </form>
+  <h1>Lista de Cumpleaños</h1>
+  <a href="formularios.html">Cargar cumpleaños</a>
+  <div class="principal">
+    <!-- <div class="contenedor" > 
+      <div class="contenedor_barra"> 
+        <div class="dia">Martes</div>
+        <div class="fecha">2025-04-01</div>
+        <div class="barra barra1">15:00 - 19:00</div>
+        <div class="barra barra2">19:00 - 23:00</div>
+      </div>
+    </div>
+    <div class="contenedor" > 
+      <div class="contenedor_barra"> 
+        <div class="dia">Miércoles</div>
+        <div class="fecha">2025-03-31</div>
+        <div class="barra barra1">15:00 - 19:00</div>
+        <div class="barra barra2">19:00 - 23:00</div>
+      </div>
+    </div>
+    <div class="contenedor" > 
+      <div class="contenedor_barra"> 
+        <div class="dia">Miércoles</div>
+        <div class="fecha">2025-03-31</div>
+        <div class="barra barra1">15:00 - 19:00</div>
+        <div class="barra barra2">19:00 - 23:00</div>
+        <div class="barra barra3">23:00 - 03:00</div>
+      </div>
+    </div> -->
+  </div>
 </body>
-<script>
-  const form = document.querySelector('form');
-  form.addEventListener('change', (event) => {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const birthday = document.getElementById('birthday').value;
-    const day = obtenerDiaSemana(birthday);
-    form.appendChild(document.createElement('p')).textContent = `${day}`;
-    // alert(`El cumpleaños de ${name} es ${day}`);
-  });
-  function obtenerDiaSemana(fechaString) {
-  // Convertir la fecha de cadena de texto a un objeto Date
-  const fecha = new Date(fechaString);
-
-  // Array con los nombres de los días de la semana
-  const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-
-  // Obtener el día de la semana (0 = Domingo, 1 = Lunes, ...)
-  const diaSemana = fecha.getDay();
-
-  // Retornar el nombre del día
-  return diasSemana[diaSemana];
-}
-
-// Ejemplo de uso
-const fecha = "2025-03-16"; // Formato ISO (YYYY-MM-DD)
-console.log(obtenerDiaSemana(fecha)); // Resultado: Domingo
-
-</script>
 </html>
+<script>
+  let cumples = JSON.parse(localStorage.getItem('cumples'))
+  let contenedor_principal = document.querySelector('.principal')
+  for (let i = 0; i < cumples.length; i++) {
+    // creamos el contenedor que va a estar dentro del contenedor principal, el que contiene toda la barra
+    let contenedor = document.createElement('div')
+    contenedor.classList.add('contenedor')
+    contenedor_principal.appendChild(contenedor)
+    //creamos el contenedor que contiene los contenedores con los datos de la barra
+    let contenedor_barra = document.createElement('div')
+    contenedor_barra.classList.add('contenedor_barra')
+    contenedor.appendChild(contenedor_barra)
+
+    let dia = document.createElement('div')
+    dia.classList.add('dia')
+    dia.textContent = cumples[i].dia
+    contenedor_barra.appendChild(dia)
+
+    let fecha = document.createElement('div')
+    fecha.classList.add('fecha')
+    fecha.textContent = cumples[i].cumple
+    contenedor_barra.appendChild(fecha)
+
+    let barra1 = document.createElement('div')
+
+    barra1.classList.add('barra')
+    barra1.classList.add('barra1')
+    barra1.textContent = cumples[i].Hora_inicio + ' - ' + cumples[i].Hora_fin
+    contenedor_barra.appendChild(barra1)
+
+  }
+</script>

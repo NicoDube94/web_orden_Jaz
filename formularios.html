@@ -9,6 +9,7 @@
 <body>
   <h1>Carga cada cumpleaños</h1>
   <h3>Agrega cada cumpleaños por separado en cada fecha:</h3>
+  <a href="index.html"> <- Volver a la lista de cumpleaños</a>
   <form>
     <fieldset>
       <legend>Carga de Datos</legend>
@@ -23,18 +24,22 @@
   </form>
   <script type="module">
     const form = document.querySelector('form');
+    let cumples=[]
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const cumple = document.getElementById('cumple').value;
       const Hora_inicio = document.getElementById('Hora_inicio').value;
       const Hora_fin = document.getElementById('Hora_fin').value;
       let dia = obtenerDiaSemana(cumple);
-      let diccionario={dia:dia,cumple:cumple,Hora_inicio:Hora_inicio,Hora_fin:Hora_fin}
-      const archivoJSON = JSON.stringify(diccionario,null,2);
+      const fechaFormateada = formatDate(cumple);
+      let diccionario={dia:dia,cumple:fechaFormateada,Hora_inicio:Hora_inicio,Hora_fin:Hora_fin}
+      cumples.push(diccionario)
+      const archivoJSON = JSON.stringify(cumples,null,2);
       console.log(archivoJSON);
-      form.appendChild(document.createElement('div')).innerHTML = `<p><b>${dia} ${cumple} ${Hora_inicio} ${Hora_fin}</b></p>`;
+      localStorage.setItem(`cumples`,archivoJSON);
+      form.appendChild(document.createElement('div')).innerHTML = `<p><b>${dia} ${fechaFormateada} ${Hora_inicio} ${Hora_fin}</b></p>`;
     });
-
+    
     function obtenerDiaSemana(fechaString) {
       // Convertir la fecha de cadena de texto a un objeto Date
       const fecha = new Date(fechaString);
@@ -47,6 +52,18 @@
 
       // Retornar el nombre del día
       return diasSemana[diaSemana];
+    }
+    function formatDate(date){
+      //parseamos el date para que sea un objeto Date
+      const fecha = new Date(Date.parse(date));
+      // Obtener los componentes de la fecha
+      const dia = String(fecha.getDate()).padStart(2, '0'); // Agrega un 0 si el día tiene un solo dígito
+      const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses comienzan en 0, por lo que se suma 1
+      const anio = fecha.getFullYear(); // Obtiene el año completo
+      const diaN=parseInt(dia)
+      // Formatear la fecha
+      const dateFormat = `${diaN+1}-${mes}-${anio}`;
+      return dateFormat; // Ejemplo: "30-03-2025"
     }
   </script>
 </body>
